@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Messenger.Data.Entities
 {
-    class Message
+    public class Message
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
-        public Guid SenderId { get; set; }
+        public string SenderId { get; set; }
         public User Sender { get; set; }
         public Guid ChatId { get; set; }
         public Chat Chat { get; set; }

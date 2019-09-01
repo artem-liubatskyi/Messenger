@@ -13,4 +13,8 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Messenger.Data\Messenger.Data.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -2,7 +2,7 @@
 
 namespace Messenger.Data.Entities
 {
-    class ChatType
+    public class ChatType
     {
         [Key]
         public int Id { get; set; }

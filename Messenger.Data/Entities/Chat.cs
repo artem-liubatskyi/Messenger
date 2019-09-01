@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Messenger.Data.Entities
 {
-    class Chat
+    public class Chat
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
