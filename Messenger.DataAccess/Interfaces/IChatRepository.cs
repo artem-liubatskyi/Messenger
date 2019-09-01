@@ -1,13 +1,15 @@
 ﻿using Messenger.Data.Entities;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Messenger.DataAccess.Interfaces
 {
     public interface IChatRepository
     {
-        IQueryable<Chat> GetUserChats(string userId)
+        IQueryable<Chat> GetUsersChats(string userId);
+        IQueryable<UserChat> GetMembers(string chatId);
+        void Delete(string chatId);
+        Chat Add(Chat entity);
+        Chat Update(Chat entity);
+        Chat GetWithMesages(string chatId);
     }
 }

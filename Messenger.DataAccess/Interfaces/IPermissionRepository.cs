@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Messenger.Data.Entities;
 
 namespace Messenger.DataAccess.Interfaces
 {
-    interface IPermissionRepository
+    public interface IPermissionRepository
     {
+        Permission GetByName();
     }
 }
