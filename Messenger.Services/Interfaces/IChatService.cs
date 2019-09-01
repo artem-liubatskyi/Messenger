@@ -1,18 +1,16 @@
 ﻿using Messenger.Data.Entities;
 using Messenger.Services.Defenitions;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace Messenger.Services.Interfaces
 {
     public interface IChatService
     {
-        ServiceResult<Chat> Create(Chat chat);
-        ServiceResult<Chat> Update(Chat chat);
-        ServiceResult<Chat> Delete(string chatId);
-        ServiceResult<Chat> ClearHistory(string chatId);
-        ServiceResult<Chat> AddUserToChat(string chatId, string userId);
-        ServiceResult<Chat> RemoveUserFromChat(string chatId, string userId);
+        Task<ServiceResult<Chat>> Create(Chat chat);
+        Task<ServiceResult<Chat>> Update(Chat chat);
+        Task<ServiceResult<Chat>> Delete(string chatId);
+        Task<ServiceResult<Chat>> ClearHistory(string chatId);
+        Task<ServiceResult<Chat>> AddUserToChat(string chatId, string userId);
+        Task<ServiceResult<Chat>> RemoveUserFromChat(string chatId, string userId);
     }
 }

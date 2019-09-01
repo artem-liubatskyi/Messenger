@@ -1,18 +1,16 @@
 ﻿using Messenger.Data.Entities;
 using Messenger.Services.Defenitions;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace Messenger.Services.Interfaces
 {
     public interface IUserService
     {
-        ServiceResult<User> Create(User user);
-        ServiceResult<User> Update(User user);
-        ServiceResult<User> RestorePassword(User user);
-        ServiceResult<User> Authenticate(User user);
-        ServiceResult<User> AddPermission(UserPermission permission);
-        ServiceResult<User> RemovePermission(UserPermission permission);
+        Task<ServiceResult<User>> Create(User user);
+        Task<ServiceResult<User>> Update(User user);
+        Task<ServiceResult<User>> RestorePassword(User user);
+        Task<ServiceResult<User>> Authenticate(string userName, string password);
+        Task<ServiceResult<User>> AddPermission(UserPermission permission);
+        Task<ServiceResult<User>> RemovePermission(UserPermission permission);
     }
 }
