@@ -13,16 +13,22 @@ namespace Messenger.Web.Controllers
         private readonly IUserService userService;
         private readonly IMapper mapper;
 
+        public UserController(IUserService userService, IMapper mapper)
+        {
+            this.userService = userService;
+            this.mapper = mapper;
+        }
+
         [HttpPost("Authenticate")]
         public async Task<IActionResult> Authenticate([FromBody]LoginViewModel model)
         {
-            var result = await userService.Authenticate(model.UserName, model.Password);
+            var result = await userService.Authenticate(model.UserName, model.Password, model.RememberMe);
             return Ok(result.Result);
         }
         [HttpPost("Register")]
         public async Task<IActionResult> Register(RegistrationViewModel model)
         {
-            var result = await userService.Create(mapper.Map<User>(model));
+            var result = await userService.Create(mapper.Map<User>(model), model.Password);
             return Ok(result.Result);
         }
     }
