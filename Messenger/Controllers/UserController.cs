@@ -31,5 +31,6 @@ namespace Messenger.Web.Controllers
             var result = await userService.Create(mapper.Map<User>(model), model.Password);
             return Ok(result.Result);
         }
+
     }
 }
