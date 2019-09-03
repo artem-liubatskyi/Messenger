@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 namespace Messenger.Web.Controllers
 {
     [Route("api/[controller]")]
-    public class UserController : Controller
+    public class AccountController : Controller
     {
         private readonly IUserService userService;
         private readonly IMapper mapper;
 
-        public UserController(IUserService userService, IMapper mapper)
+        public AccountController(IUserService userService, IMapper mapper)
         {
             this.userService = userService;
             this.mapper = mapper;
