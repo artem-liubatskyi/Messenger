@@ -12,6 +12,12 @@ namespace Messenger.Services
     public class MessageService : IMessageService
     {
         private readonly IMessageRepository messageRepository;
+
+        public MessageService(IMessageRepository messageRepository)
+        {
+            this.messageRepository = messageRepository;
+        }
+
         public async Task<ServiceResult<Message>> Add(Message message)
         {
             var messageEntity = await messageRepository.Add(message);
