@@ -10,7 +10,6 @@ namespace Messenger.DataAccess.Interfaces
         Task<Message> Get(string messageId);
         Task<Message> Update(Message entity);
         void Delete(Message entity);
-        Task<IEnumerable<Message>> GetUserMessagesByChatId(string userId, string chatId);
         void Delete(IReadOnlyCollection<Message> messages);
     }
 }
