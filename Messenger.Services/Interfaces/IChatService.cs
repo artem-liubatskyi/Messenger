@@ -9,8 +9,8 @@ namespace Messenger.Services.Interfaces
         Task<ServiceResult<Chat>> Create(Chat chat);
         Task<ServiceResult<Chat>> Update(Chat chat);
         Task<ServiceResult<Chat>> Delete(string chatId);
-        Task<ServiceResult<Chat>> ClearHistory(string chatId);
-        Task<ServiceResult<Chat>> AddUserToChat(string chatId, string userId);
-        Task<ServiceResult<Chat>> RemoveUserFromChat(string chatId, string userId);
+        Task<ServiceResult<Chat>> ClearHistory(string userId, string chatId);
+        Task<ServiceResult<UserChat>> AddUserToChat(string chatId, string userId);
+        Task<ServiceResult<UserChat>> RemoveUserFromChat(string chatId, string userId);
     }
 }

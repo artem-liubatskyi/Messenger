@@ -2,13 +2,17 @@
 {
     public class ServiceResult<TResult>
     {
+        public ServiceResult()
+        {
+            IsSuccessed = true;
+        }
         public ServiceResult(TResult result)
         {
             Result = result;
             IsSuccessed = true;
         }
 
-        public ServiceResult(TResult result, string errorMessage) : this(result)
+        public ServiceResult(string errorMessage)
         {
             IsSuccessed = false;
             ErrorMessage = errorMessage;

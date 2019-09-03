@@ -9,8 +9,9 @@ namespace Messenger.DataAccess.Interfaces
         Task<IEnumerable<Chat>> GetUsersChats(string userId);
         Task<IEnumerable<UserChat>> GetMembers(string chatId);
         void Delete(Chat chat);
+        Task<Chat> Get(string chatId);
         Task<Chat> Add(Chat entity);
-        Chat Update(Chat entity);
+        Task<Chat> Update(Chat entity);
         Task<Chat> GetWithMesages(string chatId);
     }
 }

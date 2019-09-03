@@ -34,6 +34,11 @@ namespace Messenger.DataAccess
             context.Remove(entity);
         }
 
+        public async Task<Chat> Get(string chatId)
+        {
+            return await context.Chats.FirstOrDefaultAsync(x=>x.Id.ToString()==chatId);
+        }
+
         public async Task<IEnumerable<UserChat>> GetMembers(string chatId)
         {
             return await context.UserChats.Where(x => x.ChatId.ToString() == chatId).ToArrayAsync();
@@ -56,9 +61,11 @@ namespace Messenger.DataAccess
                 .FirstOrDefaultAsync();
         }
 
-        public Chat Update(Chat entity)
+        public async Task<Chat> Update(Chat entity)
         {
-            return context.Update(entity).Entity;
+            var result = context.Update(entity).Entity;
+            await context.SaveChangesAsync();
+            return result;
         }
     }
 }
