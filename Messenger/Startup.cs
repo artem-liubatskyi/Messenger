@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Messenger.Data;
 using Messenger.Data.Entities;
+using Messenger.DataAccess.IoC;
 using Messenger.Services;
 using Messenger.Services.Interfaces;
+using Messenger.Services.IoC;
 using Messenger.Web.Mapping;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,7 +14,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.IdentityModel.Tokens.Jwt;
 
 namespace Messenger
 {
@@ -54,6 +55,9 @@ namespace Messenger
             });
 
             services.AddSingleton(mappingConfig.CreateMapper());
+
+            services.AddMessengerDataAccessDependencies();
+            services.AddMessengerServicesDependencies();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
