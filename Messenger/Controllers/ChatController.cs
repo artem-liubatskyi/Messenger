@@ -3,7 +3,6 @@ using Messenger.Data.Entities;
 using Messenger.Services.Interfaces;
 using Messenger.Web.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -16,13 +15,11 @@ namespace Messenger.Web.Controllers
     public class ChatController : Controller
     {
         private readonly IChatService chatService;
-        private readonly UserManager<User> userManager;
         private readonly IMapper mapper;
 
-        public ChatController(IChatService chatService, UserManager<User> userManager, IMapper mapper)
+        public ChatController(IChatService chatService, IMapper mapper)
         {
             this.chatService = chatService;
-            this.userManager = userManager;
             this.mapper = mapper;
         }
 

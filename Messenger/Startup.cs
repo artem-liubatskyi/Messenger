@@ -5,6 +5,7 @@ using Messenger.DataAccess.IoC;
 using Messenger.Services;
 using Messenger.Services.Interfaces;
 using Messenger.Services.IoC;
+using Messenger.Web.Hubs;
 using Messenger.Web.Mapping;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -59,6 +60,8 @@ namespace Messenger
             services.AddMessengerDataAccessDependencies();
             services.AddMessengerServicesDependencies();
 
+            services.AddSignalR();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -74,6 +77,10 @@ namespace Messenger
 
             app.UseHttpsRedirection();
             app.UseAuthentication();
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<ChatHub>("/chatHub");
+            });
             app.UseMvc();
         }
     }
