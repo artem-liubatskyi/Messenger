@@ -32,6 +32,7 @@ namespace Messenger.DataAccess
             }
 
             context.Remove(entity);
+            context.SaveChanges();
         }
 
         public async Task<Chat> Get(string chatId)

@@ -31,11 +31,11 @@ namespace Messenger.Services
 
             if (result.Succeeded)
             {
-                return new ServiceResult<User>(null);
+                return new ServiceResult<User>();
             }
             else
             {
-                return new ServiceResult<User>(null, "invalid username or(and) password");
+                return new ServiceResult<User>("invalid username or(and) password");
             }
         }
 
@@ -49,7 +49,7 @@ namespace Messenger.Services
             }
             else
             {
-                return new ServiceResult<User>(user, result.Errors.First().Description);
+                return new ServiceResult<User>(result.Errors.First().Description);
             }
         }
 
