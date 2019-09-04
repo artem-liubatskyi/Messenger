@@ -1,14 +1,25 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using Messenger.Data.Entities;
+using Messenger.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.SignalR;
 using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Messenger.Web.Hubs
 {
+    [Authorize]
     public class ChatHub : Hub
     {
-        public Task SendMessageToAll(string message)
-        {
-            return Clients.All.SendAsync("ReceiveMessage", message);
+        private readonly IChatService chatService;
+        private readonly IMessageService messageService;
+
+        public async Task SendMessageToAll(string chatId, string message)
+        { 
+            await messageService.Add(new Message(GetUserId(), chatId, message));
+            await Clients.All.SendAsync("ReceiveMessage", message);
         }
 
         public Task SendMessageToCaller(string message)
@@ -42,5 +53,11 @@ namespace Messenger.Web.Hubs
             await Clients.All.SendAsync("UserDisconnected", Context.ConnectionId);
             await base.OnDisconnectedAsync(ex);
         }
+        private string GetUserId()
+        {
+            return Context.User.Identity.Name;
+        }
+
+       
     }
 }

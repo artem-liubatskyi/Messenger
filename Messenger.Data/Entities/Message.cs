@@ -18,5 +18,13 @@ namespace Messenger.Data.Entities
         public bool IsReaded { get; set; }
         public bool IsEdited { get; set; }
         public long ViewsCount { get; set; }
+
+        public Message(string senderId, string chatId, string content)
+        {
+            SenderId = senderId;
+            ChatId = new Guid(chatId);
+            Content = content;
+            Added = DateTime.UtcNow;
+        }
     }
 }

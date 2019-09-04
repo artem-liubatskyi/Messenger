@@ -8,6 +8,6 @@ namespace Messenger.Services.Interfaces
     {
         Task<ServiceResult<Message>> Add(Message message);
         Task<ServiceResult<Message>> Edit(Message message);
-        Task<ServiceResult<Message>> Delete(string messageId);
+        Task<ServiceResult<Message>> Delete(string messageId, string userId);
     }
 }
