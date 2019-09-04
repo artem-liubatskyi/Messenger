@@ -2,6 +2,7 @@
 using Messenger.Data.Entities;
 using Messenger.Services.Interfaces;
 using Messenger.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Messenger.Web.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class ChatController : Controller
     {
