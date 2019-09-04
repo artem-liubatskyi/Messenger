@@ -3,6 +3,7 @@ using Messenger.DataAccess.Interfaces;
 using Messenger.Services.Defenitions;
 using Messenger.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -79,6 +80,23 @@ namespace Messenger.Services
 
             chatRepository.Delete(chatEntity);
             return new ServiceResult<Chat>();
+        }
+
+        public Task<ServiceResult<Chat>> Get(Chat chat)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public async Task<ServiceResult<IEnumerable<Message>>> GetMessages(string chatId, int skipCount, int takeCount)
+        {
+            var chatEntity = await chatRepository.Get(chatId);
+
+            if (chatEntity == null)
+                return new ServiceResult<IEnumerable<Message>>($"No chat with id: {chatId}");
+
+            var messages = await messageRepository.Get(chatId, skipCount, takeCount);
+
+            return new ServiceResult<IEnumerable<Message>>(messages);
         }
 
         public async Task<ServiceResult<UserChat>> RemoveUserFromChat(string chatId, string userId)

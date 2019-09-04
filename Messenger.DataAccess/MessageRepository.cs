@@ -1,7 +1,9 @@
 ﻿using Messenger.Data;
 using Messenger.Data.Entities;
 using Messenger.DataAccess.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Messenger.DataAccess
@@ -38,7 +40,14 @@ namespace Messenger.DataAccess
         {
             return await context.Messages.FindAsync(messageId);
         }
-
+        public async Task<IEnumerable<Message>> Get(string chatId, int skipCount, int takeCount)
+        {
+            return await context.Messages.Where(x=>x.ChatId.ToString() == chatId)
+                .AsNoTracking()
+                .Skip(skipCount)
+                .Take(takeCount)
+                .ToArrayAsync();
+        }
         public async Task<Message> Update(Message entity)
         {
             var messageEntity = context.Messages.Update(entity).Entity;

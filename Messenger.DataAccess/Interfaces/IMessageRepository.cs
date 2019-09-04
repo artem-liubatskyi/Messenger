@@ -11,5 +11,6 @@ namespace Messenger.DataAccess.Interfaces
         Task<Message> Update(Message entity);
         void Delete(Message entity);
         void Delete(IReadOnlyCollection<Message> messages);
+        Task<IEnumerable<Message>> Get(string chatId, int skipCount, int takeCount);
     }
 }
