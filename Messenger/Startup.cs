@@ -34,7 +34,8 @@ namespace Messenger
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<User, IdentityRole>()
-                .AddEntityFrameworkStores<MessengerDbContext>();
+                .AddEntityFrameworkStores<MessengerDbContext>()
+                .AddDefaultTokenProviders(); ;
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -61,7 +62,6 @@ namespace Messenger
             services.AddMessengerServicesDependencies();
 
             services.AddSignalR();
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

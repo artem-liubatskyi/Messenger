@@ -20,7 +20,7 @@ namespace Messenger.Web.Controllers
         }
 
         [HttpPost("Authenticate")]
-        public async Task<IActionResult> Authenticate([FromBody]LoginViewModel model)
+        public async Task<IActionResult> Authenticate(LoginViewModel model)
         {
             var result = await userService.Authenticate(model.UserName, model.Password, model.RememberMe);
             return Ok(result.Result);

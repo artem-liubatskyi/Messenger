@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -7,10 +7,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Messenger.DataAccess\Messenger.DataAccess.csproj" />
     <ProjectReference Include="..\Messenger.Data\Messenger.Data.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\" />
   </ItemGroup>
 
   <ItemGroup>

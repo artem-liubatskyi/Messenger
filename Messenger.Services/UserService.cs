@@ -1,11 +1,11 @@
 ﻿using Messenger.Data.Entities;
 using Messenger.Services.Defenitions;
 using Messenger.Services.Interfaces;
+using Messenger.Services.Models;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-
 namespace Messenger.Services
 {
     public class UserService : IUserService
@@ -24,18 +24,26 @@ namespace Messenger.Services
             throw new NotImplementedException();
         }
 
-        public async Task<ServiceResult<User>> Authenticate(string userName, string password, bool rememberMe)
+        public async Task<ServiceResult<UserDto>> Authenticate(string userName, string password, bool rememberMe)
         {
             var result =
-            await signInManager.PasswordSignInAsync(userName, password, rememberMe, false);
+                await signInManager.PasswordSignInAsync(userName, password, rememberMe, false);
+
+            var user = await userManager.FindByNameAsync(userName);
 
             if (result.Succeeded)
             {
-                return new ServiceResult<User>();
+                var accessToken = await userManager.GenerateUserTokenAsync(user, "Default", "AccessToken");
+                var refreshToken = await userManager.GenerateUserTokenAsync(user, "Default", "RefreshToken");
+
+                await userManager.SetAuthenticationTokenAsync(user, "Default", "RefreshToken", refreshToken);
+                await userManager.SetAuthenticationTokenAsync(user, "Default", "AccessToken", accessToken);
+
+                return new ServiceResult<UserDto>(new UserDto(user.Id, user.UserName, accessToken, refreshToken));
             }
             else
             {
-                return new ServiceResult<User>("invalid username or(and) password");
+                return new ServiceResult<UserDto>("invalid username or(and) password");
             }
         }
 

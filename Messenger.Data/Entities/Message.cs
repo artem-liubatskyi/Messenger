@@ -19,6 +19,10 @@ namespace Messenger.Data.Entities
         public bool IsEdited { get; set; }
         public long ViewsCount { get; set; }
 
+        public Message()
+        {
+
+        }
         public Message(string senderId, string chatId, string content)
         {
             SenderId = senderId;
