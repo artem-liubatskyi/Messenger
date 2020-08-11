@@ -28,6 +28,16 @@ namespace Messenger
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("Cors",
+                    builder => builder
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowAnyOrigin()
+                        .AllowCredentials());
+            });
+
             services.AddTransient<IUserService, UserService>();
 
             services.AddDbContext<MessengerDbContext>(options =>
@@ -74,7 +84,7 @@ namespace Messenger
             {
                 app.UseHsts();
             }
-
+            app.UseCors("Cors");
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseSignalR(routes =>
